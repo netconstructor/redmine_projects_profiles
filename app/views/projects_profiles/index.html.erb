@@ -1,0 +1,20 @@
+<% html_title l(:profile_plugin_name) %>
+<table style="position:relative;top:-40px;">
+<tr>
+<td>
+<% @projects.each do |category, project_array| %>
+<a href="#<%=category%>"><%= category%></a>
+<% end %>
+</td>
+</tr>
+<% @projects.each do |category, projects_array| %>
+    <tr>
+    <td>
+    <h1><a name="<%=category%>" style="color:black;cursor:default;"><%= category%></a></h1>
+    </td>
+    </tr>       
+    <% projects_array.each do |one_project| %>
+      <%=render :partial => "project_details", :locals=>{:project=>one_project} %>
+    <%end%>
+<% end %>
+</table>

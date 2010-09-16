@@ -1,0 +1,29 @@
+<tr>
+    <td style="width:400px;">
+    <h4>
+    <% content_tag('div') do %>
+    <%=link_to(project.name.to_s, :controller => "projects", :action => "show", :id => project.id) %>
+      <%=alt_name(project)%>
+    <%end%>
+    </h4>    
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <table>           
+    <% for custom_value in project.custom_values %>
+      <% if (!custom_value.value.blank?)  %>
+        <%next if ( (custom_value.custom_field_id == @main_sort) ||  (custom_value.custom_field_id==@sub_sort) || (custom_value.custom_field_id==@alt_name) )%>
+        <%next if (@profiles.select{|e| e.meaning==custom_value.custom_field_id}.size>0)%>
+        <tr><td><%=h custom_value.custom_field.name%>: <%=h show_value(custom_value) %></td></tr>
+      <% end %>
+    <% end %>
+    </table>
+    </td>
+    <tr>
+      <td style="width:400px;">
+        Users    
+      </td>
+    </tr>
+<br/>
+</tr> 

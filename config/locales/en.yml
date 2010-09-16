@@ -1,0 +1,13 @@
+en:
+  projects_profiles_plugin_name: "Projects profiles"
+  projects_profiles_fields_position: "Position of fields"
+  projects_profiles_settings: "Settings"
+  projects_profiles_field_for_sort: "Field for sorting"
+  projects_profiles_field_for_alt_name: "Field for alternative name"
+  projects_profiles_not_show_field: "Don`t show"
+  projects_profiles_save_button: "Save changes"
+  projects_profiles_settings_saved: "Setting for workers was saved"
+  projects_profiles_rest_sort: "Rest of workers"
+  projects_profiles_projects: "Projects"
+  projects_profiles_error_configure: "Please, configure plugin first."
+  projects_profiles_error_no_fields: "Please, create custom fields for users first."  

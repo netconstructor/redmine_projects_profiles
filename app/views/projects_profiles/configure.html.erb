@@ -1,0 +1,27 @@
+<% html_title l(:projects_profiles_plugin_name) %>
+<h2><%=l(:projects_profiles_plugin_name)%></h2>
+<% if (@fields.size>0) %>
+  <% form_for :project_profile, @profile, :url => { :action => "configure" },
+                          :builder => TabularFormBuilder,
+                          :lang => current_language,
+                          :html => { :id => 'profile_form' } do |f| %>
+    <div class="splitcontentleft">
+      <h3><%=l(:projects_profiles_fields_showing) %></h3>
+      <div class="box tabular">
+        <% @fields.each do |key,value| %>
+          <p><%=label_tag value[0]%>: <%= select("projects_profile", "position_#{key}", options_for_select([[l(:projects_profiles_show), "show"],[l(:projects_profiles_not_show),"not show"]], :selected => value[1]), { :include_blank => false }, {:width=>"30"}) %> </p>
+        <%end%>
+      </div>
+      <h3><%=l(:projects_profiles_settings) %></h3>
+      <div class="box tabular">
+        <p><%=label_tag l(:projects_profiles_main_sorting)%> <%= select("projects_profile", "group_field_main", options_for_select(@custom_fields.collect{|e| [e.name, e.id.to_s] }, :selected => @default_main.to_s), { :include_blank => false }) %> </p>
+        <p><%=label_tag l(:projects_profiles_sub_sorting)%> <%= select("projects_profile", "group_field_sub_main", options_for_select(@custom_fields.collect{|e| [e.name, e.id.to_s] }, :selected => @default_sub_main.to_s), { :include_blank =>  false}) %> </p>
+        <p><%=label_tag l(:projects_profiles_alt_name)%> <%= select("projects_profile", "alt_name", options_for_select(@fields.collect{|key, value| [value[0], key.to_s] }, :selected => @default_alt_name.to_s), { :include_blank =>  false}) %> </p>
+      </div>
+      <%=submit_tag l(:projects_profiles_save_button)%>         
+    </div>
+  <%end%>
+<%else%>
+  <h3><%= l(:projects_profiles_error_no_fields)%></h3>
+<%end%>
+
