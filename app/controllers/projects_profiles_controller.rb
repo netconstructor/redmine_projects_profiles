@@ -59,7 +59,8 @@ class ProjectsProfilesController < ApplicationController
 
   def configure
     show_text = l(:projects_profiles_show)
-    @fields = {"description"=>[l(:projects_profiles_description),show_text], "homepage"=>[l(:projects_profiles_homepage), show_text], "created_on"=>[l(:projects_profiles_created_on), show_text], "updated_on"=>[l(:projects_profiles_updated_on), show_text]}
+    #@fields = {"description"=>[l(:projects_profiles_description),show_text], "homepage"=>[l(:projects_profiles_homepage), show_text], "created_on"=>[l(:projects_profiles_created_on), show_text], "updated_on"=>[l(:projects_profiles_updated_on), show_text]}
+    @fields = {}
     if request.post?
       ProjectsProfile.delete_all      
       params["projects_profile"].each do |key, value|

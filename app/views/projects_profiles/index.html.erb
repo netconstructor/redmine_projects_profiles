@@ -16,7 +16,7 @@
     <%projects_hash.sort{|x,y| x[0]<=>y[0]}.each do |sub_category, projects_array|%>
       <tr>
         <td>
-        <h3><%= sub_category %></h3>
+        <h3><%= sub_category if (!sub_category.blank?) %></h3>
         </td>
       </tr>
       <% projects_array.each do |one_project| %>

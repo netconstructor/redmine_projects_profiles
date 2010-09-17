@@ -16,7 +16,7 @@
       <div class="box tabular">
         <p><%=label_tag l(:projects_profiles_main_sorting)%> <%= select("projects_profile", "group_field_main", options_for_select(@custom_fields.collect{|e| [e.name, e.id.to_s] }, :selected => @default_main.to_s), { :include_blank => false }) %> </p>
         <p><%=label_tag l(:projects_profiles_sub_sorting)%> <%= select("projects_profile", "group_field_sub_main", options_for_select(@custom_fields.collect{|e| [e.name, e.id.to_s] }, :selected => @default_sub_main.to_s), { :include_blank =>  false}) %> </p>
-        <p><%=label_tag l(:projects_profiles_alt_name)%> <%= select("projects_profile", "alt_name", options_for_select(@fields.collect{|key, value| [value[0], key.to_s] }, :selected => @default_alt_name.to_s), { :include_blank =>  false}) %> </p>
+        <p><%=label_tag l(:projects_profiles_alt_name)%> <%= select("projects_profile", "alt_name", options_for_select(@custom_fields.collect{|e| [e.name, e.id.to_s] }, :selected => @default_alt_name.to_s), { :include_blank =>  true}) %> </p>
       </div>
       <%=submit_tag l(:projects_profiles_save_button)%>         
     </div>

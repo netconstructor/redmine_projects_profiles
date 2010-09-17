@@ -21,10 +21,22 @@
         <%next if ( (custom_value.custom_field_id.to_s == @main_sort.to_s) ) %>
         <%next if ( (custom_value.custom_field_id.to_s == @sub_sort.to_s) ) %>
         <%next if ( (custom_value.custom_field_id.to_s == @alt_name.to_s) ) %>
-        <%next if (@profiles.select{|e| e.meaning==custom_value.custom_field_id}.size>0)%>
+        <%next if (@profiles.select{|e| ( (e.meaning==custom_value.custom_field_id.to_s) && (e.value=="not show") )}.size>0)%>
         <tr><td><%=h custom_value.custom_field.name%>: <%=h show_value(custom_value) %></td></tr>
       <% end %>
     <% end %>
+    <%if (!project.homepage.blank?)%>
+      <tr><td><%= l(:projects_profiles_homepage)%>: <%=project.homepage%></td></tr>
+    <%end%> 
+    <%if (!project.created_on.blank?)%>
+      <tr><td><%= l(:projects_profiles_created_on)%>: <%=project.created_on%></td></tr>
+    <%end%>
+    <%if (!project.updated_on.blank?)%>
+      <tr><td><%= l(:projects_profiles_updated_on)%>: <%=project.updated_on%></td></tr>
+    <%end%>
+    <%if (!project.description.blank?)%>
+      <tr><td><%= l(:projects_profiles_description)%>: <%=project.description%></tr>
+    <%end%>
     </table>
     </td>
     <td style="width:400px;">
