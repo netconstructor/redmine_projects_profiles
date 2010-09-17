@@ -2,19 +2,26 @@
 <table style="position:relative;top:-40px;">
 <tr>
 <td>
-<% @projects.each do |category, project_array| %>
+<% @projects.sort{|x,y| x[0]<=>y[0]}.each do |category, projects_hash| %>
 <a href="#<%=category%>"><%= category%></a>
 <% end %>
 </td>
 </tr>
-<% @projects.each do |category, projects_array| %>
+<% @projects.sort{|x,y| x[0]<=>y[0]}.each do |category, projects_hash| %>
     <tr>
     <td>
     <h1><a name="<%=category%>" style="color:black;cursor:default;"><%= category%></a></h1>
     </td>
     </tr>       
-    <% projects_array.each do |one_project| %>
-      <%=render :partial => "project_details", :locals=>{:project=>one_project} %>
+    <%projects_hash.sort{|x,y| x[0]<=>y[0]}.each do |sub_category, projects_array|%>
+      <tr>
+        <td>
+        <h3><%= sub_category %></h3>
+        </td>
+      </tr>
+      <% projects_array.each do |one_project| %>
+        <%=render :partial => "project_details", :locals=>{:project=>one_project} %>
+      <%end%>
     <%end%>
 <% end %>
 </table>

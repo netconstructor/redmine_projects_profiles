@@ -3,7 +3,11 @@
     <td style="width:400px;">
     <h4>
     <% content_tag('div') do %>
-    <%=link_to(project.name.to_s, :controller => "projects", :action => "show", :id => project.id) %>
+       <% if User.current.allowed_to?({:controller => "projects", :action => "show"}, project, :global => "false") %>
+          <%= link_to (project.name.to_s, :controller=>"projects", :action=>"show", :id=>project.id) %>        
+        <%else%>
+          <%= project.name%>
+        <%end%>
       <%=alt_name(project)%>
     <%end%>
     </h4>    
@@ -15,6 +19,8 @@
     <% for custom_value in project.custom_values %>
       <% if (!custom_value.value.blank?)  %>        
         <%next if ( (custom_value.custom_field_id.to_s == @main_sort.to_s) ) %>
+        <%next if ( (custom_value.custom_field_id.to_s == @sub_sort.to_s) ) %>
+        <%next if ( (custom_value.custom_field_id.to_s == @alt_name.to_s) ) %>
         <%next if (@profiles.select{|e| e.meaning==custom_value.custom_field_id}.size>0)%>
         <tr><td><%=h custom_value.custom_field.name%>: <%=h show_value(custom_value) %></td></tr>
       <% end %>

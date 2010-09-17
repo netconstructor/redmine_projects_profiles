@@ -36,6 +36,25 @@ class ProjectsProfilesController < ApplicationController
       projects_without_category = Project.find_by_sql("Select * from projects where id not in (#{selected_projects}) ")
       @projects[l(:projects_profiles_rest_sort)] = projects_without_category if (projects_without_category.size>0)
     end  
+    #sort inside each category for sub category
+    temp_projects, @projects = @projects, {}
+    temp_projects.each do |main_key, value|
+      main_sorted = value
+      new_hash = {}
+      temp_array = []
+      #main_sorted.sort!{|x,y| x.custom_values.select{|e| e.custom_field_id==@sub_sort}[0].value <=> y.custom_values.select{|e| e.custom_field_id==@sub_sort}[0].value}
+      while (main_sorted.size>0) do
+        #searching for sub_sorting value        
+        key = main_sorted[0].custom_values.select{|e| e.custom_field_id.to_s==@sub_sort}[0].value
+        #searching for all projects with that value
+        temp_array = main_sorted.select{|el_project| el_project.custom_values.select{|el_value| el_value.custom_field_id.to_s ==@sub_sort}[0].value == key}
+        #delete all elements with that value
+        main_sorted.delete_if{|el_project| el_project.custom_values.select{|el_value| el_value.custom_field_id.to_s ==@sub_sort}[0].value == key}
+        #temp_array.sort!{|x,y| x.custom_values.select{|e| e.custom_field_id==@sub_sort}[0].value <=> y.custom_values.select{|e| e.custom_field_id==@sub_sort}[0].value}
+        new_hash[key] = temp_array
+      end
+      @projects[main_key] = new_hash 
+    end
   end
 
   def configure

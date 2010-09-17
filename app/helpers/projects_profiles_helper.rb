@@ -1,7 +1,7 @@
 module ProjectsProfilesHelper
-def alt_name(select_project)
+def alt_name(project)
   s = ''
-  result_arr = select_project.custom_values.select{|element| element.custom_field_id==@alt_name}
+  result_arr = project.custom_values.select{|element| element.custom_field_id.to_s==@alt_name.to_s}
   if (result_arr.size>0)
     s << '(' + result_arr.join(" ") + ')'
   end
