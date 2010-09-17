@@ -26,13 +26,13 @@
       <% end %>
     <% end %>
     <%if (!project.homepage.blank?)%>
-      <tr><td><%= l(:projects_profiles_homepage)%>: <%=project.homepage%></td></tr>
+      <tr><td><%= l(:projects_profiles_homepage)%>: <%=link_to project.homepage,project.homepage%></td></tr>
     <%end%> 
     <%if (!project.created_on.blank?)%>
-      <tr><td><%= l(:projects_profiles_created_on)%>: <%=project.created_on%></td></tr>
+      <tr><td><%= l(:projects_profiles_created_on)%>: <%=format_time(project.created_on)%></td></tr>
     <%end%>
     <%if (!project.updated_on.blank?)%>
-      <tr><td><%= l(:projects_profiles_updated_on)%>: <%=project.updated_on%></td></tr>
+      <tr><td><%= l(:projects_profiles_updated_on)%>: <%=format_time(project.updated_on)%></td></tr>
     <%end%>
     <%if (!project.description.blank?)%>
       <tr><td><%= l(:projects_profiles_description)%>: <%=project.description%></tr>
