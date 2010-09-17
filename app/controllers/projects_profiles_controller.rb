@@ -9,14 +9,14 @@ class ProjectsProfilesController < ApplicationController
     @projects = {}    
     @profiles = ProjectsProfile.all
     projects = Project.all
-    main_sort = @profiles.select{|e| e.value == "group_field_main"}[0].meaning
-    sub_sort = @profiles.select{|e| e.value == "group_field_sub_main"}[0].meaning
+    @main_sort = @profiles.select{|e| e.value == "group_field_main"}[0].meaning
+    @sub_sort = @profiles.select{|e| e.value == "group_field_sub_main"}[0].meaning
     @alt_name = @profiles.select{|e| e.value == "alt_name"}[0].meaning
-    if ( (main_sort.nil?) || (sub_sort.nil?) || (@alt_name.nil?) )
+    if ( (@main_sort.nil?) || (@sub_sort.nil?) || (@alt_name.nil?) )
       flash[:notice] = l(:projects_profiles_error_configure)
       return
     end    
-    custom_values = CustomValue.all(:conditions => "custom_field_id='#{main_sort}'",:order => "value")
+    custom_values = CustomValue.all(:conditions => "custom_field_id='#{@main_sort}'",:order => "value")
     prev_value = "some_secret_key"
     temp_array = []
     selected_projects = ""
